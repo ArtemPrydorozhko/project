@@ -16,15 +16,32 @@ module.exports = {
                 test: /\.scss$/,
                 use: [
                     MiniCssExtarctPlugin.loader,
-                    'css-loader',
+                    {
+                        loader :'css-loader'
+                    },
                     'sass-loader'
                 ]
+            },
+            {
+                test: /\.html/,
+                use: 'html-loader'
+            },
+            {
+                test: /\.(svg|png|jpg)$/,
+                use: [{
+                    loader: 'file-loader',
+                    options: {
+                        name: '[name].[ext]',
+                        outputPath: 'img/',
+                        publicPath: '/img/'
+                    }
+                }]
             }
         ]
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: './src/html/index.html',
+            template: '!!ejs-compiled-loader!./src/html/index.ejs',
             minify: {
                 collapseWhitespace: true,
                 removeComments: true

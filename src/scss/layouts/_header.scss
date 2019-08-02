@@ -1,0 +1,118 @@
+.header-container {
+    background: $header_background;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.40);
+    height: $header_height;
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+.header {
+    max-width: $width-medium-large;
+    margin: 0 auto;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    padding: 0 10px;
+    height: 100%;
+}
+
+.logo {
+    font-size: 2em;
+    text-decoration: none;
+    font-weight: 600;
+    color: $header_logo;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.15);
+
+    &:hover {
+        color: $header_logo_hov;
+    }
+}
+
+.nav-uncollapsed {
+    margin-left: 15%;
+    width: 50%;
+}
+
+.nav-list {
+    display: flex;
+    justify-content: flex-end;
+    list-style-type: none;
+
+    &-item {
+        flex: 1;
+        border-left: 1px solid $header_li_border;
+        position: relative;
+
+        &:first-child {
+            border-left: none;
+        }
+
+        &:hover .nav-submenu {
+            visibility: visible;
+            opacity: 1;
+            transition: all 200ms ease 0s;
+        }
+    }
+
+    a {
+        color: $header_a;
+        text-decoration: none;
+        &:hover {
+            color: $header_a_hov;
+        }
+    }
+}
+
+.auth-group {
+    display: flex;
+    justify-content: flex-end;
+    list-style-type: none;
+    margin-left: auto;
+    width: 20%;
+
+    &-item {
+        flex: 1;
+    }
+
+    a {
+        color: $header_a;
+        text-decoration: none;
+        &:hover {
+            color: $header_a_hov;
+        }
+    }
+}
+
+.nav-submenu {
+    visibility: hidden;
+    opacity: 0;
+    transition: all 200ms ease 50ms;
+    position: absolute;
+    width: 200%;
+    left: -50%;
+    top: 20px;
+    list-style-type: none;
+    background: $header_submenu;
+    box-shadow: 3px 1px 5px rgba(0, 0, 0, 0.2),
+                -3px 1px 5px rgba(0, 0, 0, 0.2),
+                0 3px 5px rgba(0, 0, 0, 0.2);
+
+    &-item {
+        padding: 10px 0;
+        margin: 0 20%;
+        border-bottom: 1px solid $header_li_border;
+
+        &:last-child {
+            border-bottom: none;
+            padding-bottom: 15px;
+        }
+
+        &:first-child {
+            padding-top: 15px;
+        }
+    }
+}
+

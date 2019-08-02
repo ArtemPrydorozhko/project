@@ -1,0 +1,60 @@
+.footer-container {
+    background: $footer_background;
+}
+
+.footer {
+    max-width: $width-medium-large;
+    margin: 0 auto;
+    padding: 20px 10px;
+
+    &>div {
+        display: flex;
+    }
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    flex: 1;
+
+    &-item {
+        margin: 0 20px;
+    }
+}
+
+.footer-soc {
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    &-list {
+        display: flex;
+        justify-content: space-evenly;
+        width: 30%;
+
+        &-item a{
+            display: block;
+            width: 30px;
+            height: 30px;
+            background-position: center center;
+            background-size: 100% 100%;
+        }
+    }
+}
+
+
+.faceb-icon a{
+    background-image: url('../img/faceb.svg');
+}
+
+.twit-icon a{
+    background-image: url('../img/twit.svg');
+
+}
+
+.inst-icon a{
+    background-image: url('../img/inst.svg');
+}
+
+.copyright {
+    text-align: center;
+}

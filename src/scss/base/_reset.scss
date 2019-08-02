@@ -1,0 +1,23 @@
+*, body {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    background-image: linear-gradient($background_body, $background_body),
+    url('../img/site-background.jpg');
+    
+    background-size: 200px 200px;
+    height: 100%;
+}
+
+ul, ol {
+    list-style-type: none;
+
+}
+
+a {
+    text-align: center;
+    text-decoration: none;
+}
