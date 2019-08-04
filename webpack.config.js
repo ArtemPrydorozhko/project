@@ -5,7 +5,8 @@ const path = require('path'),
 module.exports = {
     entry: {
         main: './src/js/index.js',
-        offer: './src/js/offer.js'
+        offer: './src/js/offer.js',
+        styles: './src/js/styles.js'
     },
     output: {
         filename: 'js/[name].bundle.js',
@@ -58,6 +59,33 @@ module.exports = {
                 removeComments: true
             },
             chunks: ['offer']
+        }),
+        new HtmlWebpackPlugin({
+            template: '!!ejs-compiled-loader!./src/html/contacts.ejs',
+            filename: 'contacts.html',
+            minify: {
+                collapseWhitespace: true,
+                removeComments: true
+            },
+            chunks: ['styles']
+        }),
+        new HtmlWebpackPlugin({
+            template: '!!ejs-compiled-loader!./src/html/about.ejs',
+            filename: 'about.html',
+            minify: {
+                collapseWhitespace: true,
+                removeComments: true
+            },
+            chunks: ['styles']
+        }),
+        new HtmlWebpackPlugin({
+            template: '!!ejs-compiled-loader!./src/html/lot.ejs',
+            filename: 'lot.html',
+            minify: {
+                collapseWhitespace: true,
+                removeComments: true
+            },
+            chunks: ['styles']
         }),
         new MiniCssExtarctPlugin({
             filename: 'css/[name].css'

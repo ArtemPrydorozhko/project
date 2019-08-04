@@ -12,12 +12,15 @@
     }
     @include mq_medium {
         max-width: $width_medium;
+        padding-top: 20px;
     }
     @include mq_medium_small {
         max-width: $width_medium_small;
+        padding-top: 15px;
     }
     @include mq_small {
         max-width: $width_small;
+        padding-top: 10px;
     }
 }
 

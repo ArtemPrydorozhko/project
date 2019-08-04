@@ -1,0 +1,23 @@
+<% include src/html/header %>
+<% require('../img/map.jpg') %>
+<div class="contacts-container">
+    <h2>Contacts</h2>
+    <div class="contacts-location">
+        <p>Our location</p>
+        <div><iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3254.879181192668!2d25.1057335!3d35.3338216!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x149a59f0bedb761b%3A0x891e2350a04ff187!2zQWVyb3BpcyAyMywgWGVyb3BvdGFtb3MgNzEzIDAzLCDQk9GA0LXRhtC40Y8!5e0!3m2!1sru!2sua!4v1564925069031!5m2!1sru!2sua" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe></div>
+    </div>
+</div>
+
+<% include src/html/footer %>
+<!-- <script>
+    window.onload = function() {
+        setTimeout(()=> {
+        var map = document.querySelector('.contacts-location div');
+        if (window.navigator.onLine) {
+            map.innerHTML = '<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3254.879181192668!2d25.1057335!3d35.3338216!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x149a59f0bedb761b%3A0x891e2350a04ff187!2zQWVyb3BpcyAyMywgWGVyb3BvdGFtb3MgNzEzIDAzLCDQk9GA0LXRhtC40Y8!5e0!3m2!1sru!2sua!4v1564925069031!5m2!1sru!2sua" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>';
+        } else {
+            map.innerHTML = '<img scr="../img/map.jpg" alt="map">';
+        }
+    },1000);
+    }
+</script> -->

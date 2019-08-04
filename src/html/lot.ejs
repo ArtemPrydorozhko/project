@@ -1,0 +1,43 @@
+<% include src/html/header %>
+<% require('../img/1.jpg') %>
+<% require('../img/2.jpg') %>
+
+<div class="lot-container">
+    <% include src/html/category %>
+
+    <div class="lot">
+        <div class="lot-header">
+            <div class="lot-header-breadcrums">
+                <a href="">main</a> > <a href="">afff</a> > <a href="">lot</a>
+            </div>
+        </div>
+        <div class="lot-picture" style="background-image: url('../img/1.jpg')">
+            <!-- <img src="../img/2.jpg" alt=""> -->
+        </div>
+        <div class="lot-details">
+            <div class="lot-details-title">
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+            </div>
+            <div class="lot-details-seller">
+                seller: sfsdf
+            </div>
+            <div class="lot-details-price">
+                <span class="lot-details-price-text">Current price:</span>
+                <span class="lot-details-price-value">$400</span>
+                <form action="">
+                    <input type="number" class="lot-details-price-bet">
+                    <button>Bid</button>
+                </form>
+            </div>
+        </div>
+        <div class="lot-description">
+            <span>Description:</span>
+            <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam laboriosam sunt tempore, quasi sed adipisci modi facilis libero excepturi et perferendis, vitae id quis corporis tenetur pariatur quas. Totam, labore?
+            </p>
+        </div>
+    </div>
+
+</div>
+
+<% include src/html/footer %>
