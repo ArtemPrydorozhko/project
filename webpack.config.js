@@ -4,7 +4,8 @@ const path = require('path'),
 
 module.exports = {
     entry: {
-        main: './src/index.js',
+        main: './src/js/index.js',
+        offer: './src/js/offer.js'
     },
     output: {
         filename: 'js/[name].bundle.js',
@@ -42,10 +43,21 @@ module.exports = {
     plugins: [
         new HtmlWebpackPlugin({
             template: '!!ejs-compiled-loader!./src/html/index.ejs',
+            filename: 'index.html',
             minify: {
                 collapseWhitespace: true,
                 removeComments: true
-            }
+            },
+            chunks: ['main']
+        }),
+        new HtmlWebpackPlugin({
+            template: '!!ejs-compiled-loader!./src/html/offer.ejs',
+            filename: 'offer.html',
+            minify: {
+                collapseWhitespace: true,
+                removeComments: true
+            },
+            chunks: ['offer']
         }),
         new MiniCssExtarctPlugin({
             filename: 'css/[name].css'

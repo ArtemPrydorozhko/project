@@ -1,6 +1,5 @@
 // $header_background: #a6bcd1;
 // $header_background: linear-gradient(to bottom, #b4cde4, #a6bcd1 30%, #a6bcd1 70%, #99aec2);
-$width-medium-large: 1000px;
 
 $background_standart: #fafdfd;
 $background_body: rgba(240, 250, 255, 0.5);
@@ -23,5 +22,20 @@ $main_slider_width: 700px;
 $main_slider_height: 300px;
 
 $footer_background: #c7dbee;
+$footer_height: 100px;
+
+$btn_background: #ecffec;
+
+// $res_large: 'min-width: 1281px';
+// $res_medium_large: '(min-width: 1025px) and (max-width: 1280px)';
+// $res_medium: '(min-width: 768px) and (max-width: 1024px)';
+// $res_medium_small: '(min-width: 481px) and (max-width: 767px)';
+// $res_small: '(min-width: 320px) and (max-width: 480px)';
+
+$width_large: 1200px;
+$width_medium_large: 1000px;
+$width_medium: 100%;
+$width_medium_small: 100%;
+$width_small: 100%;
 
 // $main_background: 

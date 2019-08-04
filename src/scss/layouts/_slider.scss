@@ -5,6 +5,13 @@
     margin-top: 40px;
     border-radius: 15px;
     background: $background_standart;
+
+    @include mq_medium_small {
+        display: none;
+    }
+    @include mq_small {
+        display: none;
+    }
 }
 
 .slider {

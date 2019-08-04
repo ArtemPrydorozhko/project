@@ -1,5 +1,10 @@
 .footer-container {
     background: $footer_background;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: $footer_height;
 }
 
 .footer {
@@ -7,8 +12,21 @@
     margin: 0 auto;
     padding: 20px 10px;
 
+    @include mq_medium_small {
+        padding: 10px 0;
+    }
+    @include mq_small {
+        padding: 10px 0;
+    }
+
     &>div {
         display: flex;
+        @include mq_medium_small {
+            display: block;
+        }
+        @include mq_small {
+            display: block;
+        }
     }
 }
 
@@ -17,8 +35,23 @@
     justify-content: center;
     flex: 1;
 
+    @include mq_medium_small {
+        justify-content: space-evenly;
+        margin-bottom: 10px;
+    }
+    @include mq_small {
+        justify-content: space-evenly;
+        margin-bottom: 10px;;
+    }
+
     &-item {
         margin: 0 20px;
+        @include mq_medium_small {
+            margin: 0;
+        }
+        @include mq_small {
+            margin: 0;
+        }
     }
 }
 
@@ -29,7 +62,7 @@
     &-list {
         display: flex;
         justify-content: space-evenly;
-        width: 30%;
+        width: 150px;
 
         &-item a{
             display: block;

@@ -1,18 +1,42 @@
 .category-container {
-    margin: 0 10%;
-    padding: 20px 10px;
+    margin: 15px 20px;
+    padding: 0 10px;
     border: 1px solid $main_category_border;
     border-radius: 15px;
     display: flex;
     align-items: center;
     height: $main_category_height;
     background: $background_standart;
+
+    @include mq_medium_small {
+        margin: 10px;
+        height: $main_category_height + 20px;
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: space-evenly;
+        
+    }
+    @include mq_small {
+        margin: 5px;
+        height: $main_category_height + 20px;
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: space-evenly;
+        
+    }
 }
 
 .category {
     display: flex;
     justify-content: flex-start;
-    flex: 2;
+    flex: 1;
+
+    @include mq_medium_small {
+        flex: 0;
+    }
+    @include mq_small {
+        flex: 0;
+    }
 
     &-item {
         flex: 1;
@@ -25,6 +49,13 @@
     flex: 1;
     position: relative;
     height: $main_searc_height;
+
+    @include mq_medium_small {
+        flex: 0;
+    }
+    @include mq_small {
+        flex: 0;
+    }
 
     &-input {
         width: 100%;

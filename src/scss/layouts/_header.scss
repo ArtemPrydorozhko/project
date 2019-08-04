@@ -10,13 +10,32 @@
 }
 
 .header {
-    max-width: $width-medium-large;
     margin: 0 auto;
     display: flex;
     text-align: center;
     align-items: center;
-    padding: 0 10px;
     height: 100%;
+
+    @include mq_large {
+        max-width: $width_large;
+        padding: 0 20px;
+    }
+    @include mq_medium_large {
+        max-width: $width_medium_large;
+        padding: 0 15px;
+    }
+    @include mq_medium {
+        max-width: $width_medium;
+        padding: 0 10px;
+    }
+    @include mq_medium_small {
+        max-width: $width_medium_small;
+        padding: 10px;
+    }
+    @include mq_small {
+        max-width: $width_small;
+        padding: 0;
+    }
 }
 
 .logo {
@@ -32,8 +51,17 @@
 }
 
 .nav-uncollapsed {
-    margin-left: 15%;
-    width: 50%;
+    display: none; 
+    @include mq_large {
+        display: block;
+        margin-left: 15%;
+        width: 60%; 
+    }
+    @include mq_medium_large {
+        display: block;
+        margin-left: 15%;
+        width: 60%; 
+    }
 }
 
 .nav-list {
@@ -67,11 +95,22 @@
 }
 
 .auth-group {
-    display: flex;
-    justify-content: flex-end;
-    list-style-type: none;
-    margin-left: auto;
-    width: 20%;
+    display: none; 
+
+    @include mq_large {
+        display: flex;
+        justify-content: flex-end;
+        list-style-type: none;
+        margin-left: auto;
+        width: 25%;
+    }
+    @include mq_medium_large {
+        display: flex;
+        justify-content: flex-end;
+        list-style-type: none;
+        margin-left: auto;
+        width: 20%;
+    }
 
     &-item {
         flex: 1;
@@ -116,3 +155,120 @@
     }
 }
 
+.nav-collapsed {
+    display: block;
+    
+    @include mq_large {
+        display: none;
+    }
+
+    @include mq_medium_large {
+        display: none;
+    }
+}
+
+#nav-collapsed-toggle {
+    display: none;
+}
+
+.nav-collapsed-btn {
+    height: 30px;
+    width: 30px;
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+
+    & > span,
+    & > span::before,
+    & > span::after {
+        display: block;
+        position: absolute;
+        width: 100%;
+        height: 2px;
+        background-color: #292929;
+    }
+    & > span::before {
+    content: '';
+    top: -8px;
+
+    }
+    & > span::after {
+    content: '';
+    top: 8px;
+    }
+}
+
+.nav-list-col {
+    display: block;
+    position: absolute;
+    visibility: hidden;
+    top: 100%;
+    left: 0;
+    right: 0;
+    margin: 0;
+    list-style: none;
+    text-align: center;
+    background-color: #ECEFF1;
+    box-shadow: 1px 0px 6px rgba(0, 0, 0, .2);
+
+    &-item {
+        display: flex;
+        justify-content: flex-start;
+        padding: 12px 24px;
+        color: #333;
+        font-family: 'Roboto', sans-serif;
+        font-size: 20px;
+        font-weight: 600;
+        text-decoration: none;
+
+        border-bottom: 1px solid $header_li_border;
+        &:last-child {
+            border-bottom: none;
+        }
+
+        &:hover {
+            background-color: #CFD8DC;
+        }
+    }
+
+    a {
+        color: $header_a;
+        text-decoration: none;
+        &:hover {
+            color: $header_a_hov;
+        }
+    }
+}
+
+.nav-submenu-col {
+    display: flex;
+    justify-content: flex-start;
+    flex-flow: row wrap;
+
+    & li {
+        margin-right: 10px;
+    }
+}
+
+#nav-collapsed-toggle:checked {
+    & ~ .nav-collapsed-btn > span {
+        transform: rotate(45deg);
+    }
+    & ~ .nav-collapsed-btn > span::before{
+        top: 0;
+        transform: rotate(0);
+    }
+
+    & ~ .nav-collapsed-btn > span::after{
+        top: 0;
+        transform: rotate(90deg);
+    }
+
+    & ~ .nav-list-col {
+        visibility: visible;
+    }
+} 

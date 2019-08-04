@@ -1,0 +1,109 @@
+<% include src/html/header %>
+<% require('../img/1.jpg') %>
+<% require('../img/2.jpg') %>
+
+<div class="offer-container">
+    <% include src/html/category %>
+
+    <div class="offer">
+        <div class="offer-header">
+            <div class="offer-header-filterBtn">
+                <button class="filterBtn">Filters</button>
+            </div>
+            <div class="offer-header-breadcrums">
+                <a href="">main</a>/<a href="">category</a>
+            </div>
+            <div class="offer-header-sort">
+                <select name="" id="">
+                    <option value="">most popular</option>
+                    <option value="">cheap first</option>
+                    <option value="">expensive first</option>
+                    <option value="">whattt? you never..</option>     
+                </select>
+            </div>
+        </div>
+        <div class="offer-filter">
+            <div class="offer-filter-option-price">
+                <div class="price-word">Price, $</div>
+                <input type="number" placeholder="from" class="price-from">
+                &mdash;
+                <input type="number" placeholder="to" class="price-to">
+                <button class="price-btn">OK</button>
+            </div>
+            <div class="offer-filter-option">
+                <input type="checkbox" id="filter-option-blabla">
+                <label class="filter-option-check" for="filter-option-blabla"></label>
+                <label for="filter-option-blabla" class="filter-option-text">blahlbah</label>
+            </div>
+            <div class="offer-filter-option">
+                <input type="checkbox" id="filter-option-bubu">
+                <label class="filter-option-check" for="filter-option-bubu"></label>
+                <label for="filter-option-bubu" class="filter-option-text">bubu</label>
+            </div>
+        </div>
+        <div class="offer-lots">
+            <div class="offer-lots-item">
+                <div class="offer-lots-item-picture">
+                    <a href=""><img src="../img/2.jpg" alt="" ></a>
+                </div>
+                <div class="offer-lots-item-description">
+                    <div class="offer-lots-item-description-title">
+                        <a href="">Lorem ipsum dolor sit amet consectetur adipisicing elit.</a>
+                    </div>
+                    <div class="offer-lots-item-description-info">
+                        hfhfhffh: sdsdsdsd
+                    </div>
+                    <div class="offer-lots-item-description-price">
+                        Current Price: $400
+                        <button class="offer-lots-item-description-btn">Details</button>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="offer-lots-item">
+                <div class="offer-lots-item-picture">
+                    <a href=""><img src="../img/2.jpg" alt="" ></a>
+                </div>
+                <div class="offer-lots-item-description">
+                    <div class="offer-lots-item-description-title">
+                        <a href="">Lorem ipsum dolor sit amet consectetur adipisicing elit.</a>
+                    </div>
+                    <div class="offer-lots-item-description-info">
+                        hfhfhffh: sdsdsdsd
+                    </div>
+                    <div class="offer-lots-item-description-price">
+                        Current Price: $400
+                        <button class="offer-lots-item-description-btn">Details</button>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="offer-lots-item">
+                <div class="offer-lots-item-picture">
+                    <a href=""><img src="../img/2.jpg" alt="" ></a>
+                </div>
+                <div class="offer-lots-item-description">
+                    <div class="offer-lots-item-description-title">
+                        <a href="">Lorem ipsum dolor sit amet consectetur adipisicing elit.</a>
+                    </div>
+                    <div class="offer-lots-item-description-info">
+                        hfhfhffh: sdsdsdsd
+                    </div>
+                    <div class="offer-lots-item-description-price">
+                        Current Price: $400
+                        <button class="offer-lots-item-description-btn">Details</button>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="offer-lots-pages">
+                <div class="offer-lots-pages-wrapper">
+                    <a href="">prev</a> <a href="">1</a> from <a href="">5</a> <a href="">next</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<% include src/html/footer %>
