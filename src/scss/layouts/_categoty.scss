@@ -4,6 +4,7 @@
     border: 1px solid $main_category_border;
     border-radius: 15px;
     display: flex;
+    justify-content: space-between;
     align-items: center;
     height: $main_category_height;
     background: $background_standart;
@@ -30,7 +31,9 @@
     display: flex;
     justify-content: flex-start;
     flex: 1;
-
+    @include mq_medium {
+        flex: 1.2;
+    }
     @include mq_medium_small {
         flex: 0;
     }
@@ -49,7 +52,9 @@
     flex: 1;
     position: relative;
     height: $main_searc_height;
-
+    @include mq_medium {
+        flex: 0.8;
+    }
     @include mq_medium_small {
         flex: 0;
     }
@@ -62,11 +67,12 @@
         height: 100%;
         padding-left: 20px;
         padding-right: $main_searcBtn_width + 5px;
-        border: 1px solid $main_category_border;
+        border: 1px solid $input_color;
         border-radius: 10px;
 
         &:focus {
             outline: none;
+            box-shadow: 0 0 3px $input_color;
         }
     }
 

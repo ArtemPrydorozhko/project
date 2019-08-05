@@ -1,0 +1,26 @@
+<% include src/html/header %>
+
+<div class="createLot-container">
+    <div class="createLot">
+        <form action="/lots" method="post" enctype="multipart/form-data" class="createLot-form">
+            <input type="text" name="title" required maxlength="80" placeholder="Title">
+            <input type="number" name="price" id="" placeholder="Price" required>
+            <textarea name="description" id="" cols="30" rows="10" placeholder="Description" required></textarea>
+            <select name="category" id="">
+                <option value="other" selected hidden>Choose category</option>
+                <option value="other">Other</option>
+                <option value="auto">Auto</option>
+                <option value="computers">Computers</option>
+                <option value="appliences">Appliencs</option>
+                <option value="clothes">Clothes</option>
+            </select>
+            <input type="file" name="image" id="" accept="image/*" value="choose image" required>
+            <input type="text" name="owner" value="roflan" hidden>
+            <input type="number" name="ownerId" value=44 hidden>
+            <input type="text" name="sold" value="false" hidden>
+            <input type="submit" value="Create Lot">
+        </form>
+    </div>
+</div>
+
+<% include src/html/footer %>

@@ -251,6 +251,45 @@
             display: flex;
             justify-content: center;
             align-items: center; 
+
+            button {
+                height: 30px;
+                cursor: pointer;
+                &:focus {
+                    outline: none;
+                }
+            }
+
+            &-next {
+                background: $input_color;
+                border: 1px solid $input_color;
+                outline: none;
+                border-radius: 0 10px 10px 0;
+                color: #fff;
+                width: 70px;
+                padding: 3px;
+            }
+            &-prev {
+                background: $input_color;
+                border: 1px solid $input_color;
+                outline: none;
+                border-radius: 10px 0 0 10px;
+                color: #fff;
+                width: 70px;
+                padding: 3px;
+            }
+            &-current {
+                border: 2px solid $input_color;
+                border-radius: 50%;
+                width: 30px;
+                background: none;
+            }
+            &-max {
+                width: 30px;
+                background: none;
+                border: none;
+                color: $input_color;
+            }
         }
     }
 }
@@ -265,19 +304,24 @@
         height: 30px;
         outline: none;
         border-radius: 5px;
-        border: 1px solid $main_category_border;
+        border: 1px solid $input_color;
+
+        &:focus {
+            box-shadow: 0 0 3px $input_color;
+        }
     }
 }
 
 .price-btn {
     height: 30px;
     width: 40px;
-    background: $btn_background;
-    border: 1px solid $main_category_border;
+    background: $input_color;
+    border: 1px solid $input_color;
     outline: none;
     border-radius: 5px;
+    color: #fff;
     &:hover {
-        background: #deffde;
+        background: $btn_hover;
         box-shadow: 0 0 1px 1px rgba(0, 46, 145, 0.1);
     }
 }
@@ -318,6 +362,7 @@
         padding: 5px;
         border-right: 1px dotted $main_category_border;
         min-width: 180px;
+        width: 40%;
         text-align: center;
 
         @include mq_medium_small {
@@ -367,7 +412,12 @@
         }
         &-price {
             margin-top: 10px;
+            color: #c92f00;
             position: relative;
+
+            span {
+                font-size: 1.3em;
+            }
         }
         &-btn {
             position: absolute;
@@ -375,13 +425,14 @@
             bottom: 0;
             box-shadow: 0 1px 0 1px rgba(0,0,0,.05);
             outline: none;
-            border: 1px solid $main_category_border;
-            background: $btn_background;
+            border: 1px solid $input_color;
+            background: $input_color;
             padding: 8px;
             border-radius: 5px;
+            color: #fff;
             cursor: pointer;
             &:hover {
-                background: #deffde;
+                background: $btn_hover;
                 box-shadow: 0 0 1px 1px rgba(0, 46, 145, 0.1);
             }
 

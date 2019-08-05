@@ -6,6 +6,7 @@ module.exports = {
     entry: {
         main: './src/js/index.js',
         offer: './src/js/offer.js',
+        lot: './src/js/lot.js',
         styles: './src/js/styles.js'
     },
     output: {
@@ -81,6 +82,15 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: '!!ejs-compiled-loader!./src/html/lot.ejs',
             filename: 'lot.html',
+            minify: {
+                collapseWhitespace: true,
+                removeComments: true
+            },
+            chunks: ['lot']
+        }),
+        new HtmlWebpackPlugin({
+            template: '!!ejs-compiled-loader!./src/html/createLot.ejs',
+            filename: 'createLot.html',
             minify: {
                 collapseWhitespace: true,
                 removeComments: true
