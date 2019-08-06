@@ -11,7 +11,7 @@ const express = require('express'),
 const storage = multer.diskStorage({
     destination: './user_data/img',
     filename: function (req, file, cb) {
-        cb(null, file.originalname)
+        cb(null, Date.now().toString() + file.originalname)
     }
 })
 const upload = multer({ storage: storage, limits: 2000000 });
@@ -23,13 +23,15 @@ var lotSchema = new mongoose.Schema({
     title: String,
     image: String,
     description: String,
-    currenPrice: Number,
+    currentPrice: Number,
     category: String,
-    sellerId: Number,
+    sellerId: mongoose.SchemaTypes.ObjectId,
     seller: String,
     bids: [{
-        userId: Number,
-        price: Number
+        userId: mongoose.SchemaTypes.ObjectId,
+        user: String,
+        price: Number,
+        time: {type: Date, defalut: Date.now()}
     }]
 });
 
@@ -64,6 +66,10 @@ var Lot = mongoose.model("Lot", lotSchema);
 // ---------------------------------------
 
 app.use(bodyParser.urlencoded({ extended: true }));
+app.set('views', path.resolve(__dirname, 'dist/views'));
+app.set('view engine', 'ejs');
+app.use(express.static(path.join(__dirname, 'dist')));
+app.use(express.static(path.join(__dirname, 'user_data')));
 
 app.get('/', (req, res) => {
     res.sendFile(html + 'index.html');
@@ -136,7 +142,6 @@ app.get('/lot', async (req, res) => {
                 sortObject.title = -1;
                 break;
         }
-        console.log(queryObject);
 
         try {
             const data = await Lot.find(queryObject).sort(sortObject);
@@ -149,6 +154,16 @@ app.get('/lot', async (req, res) => {
     }
 });
 
+app.get('/lot/:id', async (req, res) => {
+    const id = req.params.id;
+    try {
+        const lot = await Lot.findById(id);
+        res.render('lot', {lot});
+    } catch (error) {
+        console.log(error);
+    }
+});
+
 
 app.post('/lot/new', upload.single('image'), (req, res) => {
     if (req.file) {
@@ -157,12 +172,11 @@ app.post('/lot/new', upload.single('image'), (req, res) => {
     else throw 'error';
 });
 
-app.get('/gg', (req, res) => {
-    res.json({ name: 'fff' });
+app.get('/aboutt', (req, res) => {
+    res.render('about.ejs',{ee: {data: "fdfnbljufdgyudvbgvy shdsygjsdywevgwj"}});
 });
 
-app.use(express.static(path.join(__dirname, 'dist')));
-app.use(express.static(path.join(__dirname, 'user_data')));
+
 
 app.get('*', (req, res) => {
     res.redirect('/');

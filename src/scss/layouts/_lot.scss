@@ -27,7 +27,7 @@
 .lot {
     margin: 10px 20px;
     display: grid;
-    grid-template-rows: 50px 300px auto;
+    grid-template-rows: 50px 300px auto auto;
     grid-template-columns: 1fr 1fr;
     border-radius: 15px;
     background: $background_standart;
@@ -36,12 +36,12 @@
     }
     @include mq_medium_small {
         margin: 0 10px;
-        grid-template-rows: 50px 300px 200px auto;
+        grid-template-rows: 50px 300px 200px auto auto;
         grid-template-columns: auto;
     }
     @include mq_small {
         margin: 0 5px;
-        grid-template-rows: 50px 300px 200px auto;
+        grid-template-rows: 50px 300px 200px auto auto;
         grid-template-columns: auto;
     }
 
@@ -172,13 +172,14 @@
             button {
                 height: 30px;
                 width: 40px;
-                background: $btn_background;
-                border: 1px solid $main_category_border;
+                background: $input_color;
+                border: 1px solid $input_color;
                 outline: none;
                 border-radius: 5px;
+                color: #fff;
                 cursor: pointer;
                 &:hover {
-                    background: #deffde;
+                    background: $btn_hover;
                     box-shadow: 0 0 1px 1px rgba(0, 46, 145, 0.1);
                 }
             }
@@ -191,22 +192,51 @@
         grid-column-start: 1;
         grid-column-end: 3;
         border: 1px solid $main_category_border;
-        border-radius: 0 0 15px 15px;
-        padding: 10px 10px 20px 10px;
+        border-bottom: none;
+        padding: 10px;
 
         @include mq_medium_small {
             grid-row-start: 4;
             grid-row-end: 5;
             grid-column-start: 1;
             grid-column-end: 2;
-            border-left: 1px solid $main_category_border;
         }
         @include mq_small {
             grid-row-start: 4;
             grid-row-end: 5;
             grid-column-start: 1;
             grid-column-end: 2;
-            border-left: 1px solid $main_category_border;
+        }
+
+        span {
+            font-size: 1.5em;
+        }
+    }
+
+    &-bids {
+        grid-row-start: 4;
+        grid-row-end: 5;
+        grid-column-start: 1;
+        grid-column-end: 3;
+        border: 1px solid $main_category_border;
+        border-radius: 0 0 15px 15px;
+        padding: 10px 10px 20px 10px;
+
+        @include mq_medium_small {
+            grid-row-start: 5;
+            grid-row-end: 6;
+            grid-column-start: 1;
+            grid-column-end: 2;
+        }
+        @include mq_small {
+            grid-row-start: 5;
+            grid-row-end: 6;
+            grid-column-start: 1;
+            grid-column-end: 2;
+        }
+
+        p {
+            margin-bottom: 10px;
         }
 
         span {

@@ -1,6 +1,5 @@
 <% include src/html/header %>
-<% require('../img/1.jpg') %>
-<% require('../img/2.jpg') %>
+<!-- <% require('../img/2.jpg') %> --> 
 
 <div class="lot-container">
     <% include src/html/category %>
@@ -8,24 +7,24 @@
     <div class="lot">
         <div class="lot-header">
             <div class="lot-header-breadcrums">
-                <a href="">main</a> > <a href="">afff</a> > <a href="">lot</a>
+                <a href="/offer.html">main</a> > <a href="/offer.html?category=<%%= lot.category %>"><%%= lot.category %></a>
             </div>
         </div>
-        <div class="lot-picture" style="background-image: url('../img/1.jpg')">
-            <!-- <img src="../img/2.jpg" alt=""> -->
+        <div class="lot-picture" style="background-image: url('/<%%= lot.image %>')">
+            
         </div>
         <div class="lot-details">
             <div class="lot-details-title">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                <%%= lot.title %>
             </div>
             <div class="lot-details-seller">
-                seller: sfsdf
+                seller: <%%= lot.seller %>
             </div>
             <div class="lot-details-price">
                 <span class="lot-details-price-text">Current price:</span>
-                <span class="lot-details-price-value">$400</span>
+                <span class="lot-details-price-value">$<%%= lot.currentPrice %></span>
                 <form action="">
-                    <input type="number" class="lot-details-price-bet">
+                    <input type="number" class="lot-details-price-bet" placeholder="$">
                     <button>Bid</button>
                 </form>
             </div>
@@ -33,8 +32,14 @@
         <div class="lot-description">
             <span>Description:</span>
             <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam laboriosam sunt tempore, quasi sed adipisci modi facilis libero excepturi et perferendis, vitae id quis corporis tenetur pariatur quas. Totam, labore?
+                <%%= lot.description %>
             </p>
+        </div>
+        <div class="lot-bids">
+            <span>Bids:</span>
+            <%% lot.bids.forEach( bid => { %>
+            <p><%%= bid.user %>: $<%%= bid.price %></p>
+            <%% }) %> 
         </div>
     </div>
 

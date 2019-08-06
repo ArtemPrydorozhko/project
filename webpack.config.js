@@ -81,7 +81,7 @@ module.exports = {
         }),
         new HtmlWebpackPlugin({
             template: '!!ejs-compiled-loader!./src/html/lot.ejs',
-            filename: 'lot.html',
+            filename: 'views/lot.ejs',
             minify: {
                 collapseWhitespace: true,
                 removeComments: true
