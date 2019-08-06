@@ -69,35 +69,88 @@ app.get('/', (req, res) => {
     res.sendFile(html + 'index.html');
 });
 
-app.get('/lot',async (req, res) => {
-    const data = await Lot.find({});
-    res.json(data);
-});
+// app.get('/lot',async (req, res) => {
+//     const data = await Lot.find({});
+//     res.json(data);
+// });
 
-app.get('/lotSearch/:search',async (req, res) => {
-    const search = req.params.search;
-    try {
-        const pattern = new RegExp(search);
-        const data = await Lot.find({title: pattern});
-        //data.concat( await User.find({title: pattern}))
+// app.get('/lotSearch/:search', async (req, res) => {
+//     const search = req.params.search;
+//     try {
+//         const pattern = new RegExp(search);
+//         const data = await Lot.find({ title: pattern });
+//         //data.concat( await User.find({title: pattern}))
 
-        res.json(data);
-    } catch (error) {
-        console.error(error);
+//         res.json(data);
+//     } catch (error) {
+//         console.error(error);
+//     }
+// });
+
+app.get('/lot', async (req, res) => {
+    const { search, category, sort, fmin, fmax } = req.query;
+
+    // data for main page 
+    if (Object.keys(req.query).length === 0) {
+        try {
+            const data = await Lot.find({}).sort({ $natural: 1 }).limit(12);
+            res.json(data);
+            
+        } catch (error) {
+            console.error(error);
+            res.send(error);
+        }
+    } else {
+
+        let queryObject = {};
+        let sortObject = {};
+
+        if (search) {
+            queryObject.title = new RegExp(search, "i");
+        } else if (category) {
+            queryObject.category = category
+        }
+
+        if (fmin) {
+            queryObject.currentPrice = {};
+            queryObject.currentPrice.$gte = Number(fmin);
+        }
+
+        if (fmax) {
+            if (!queryObject.currentPrice)
+                queryObject.currentPrice = {};
+            queryObject.currentPrice.$lte = Number(fmax);
+        }
+
+        switch (sort) {
+            case '2':
+                sortObject.currentPrice = 1;
+                break;
+            case '3':
+                sortObject.currentPrice = -1;
+                break;
+            case '4':
+                sortObject.title = 1;
+                break;
+            case '5':
+                sortObject.title = -1;
+                break;
+        }
+        console.log(queryObject);
+
+        try {
+            const data = await Lot.find(queryObject).sort(sortObject);
+            // console.log(data);
+            res.json(data);
+        } catch (error) {
+            console.error(error);
+            res.send(error);
+        }
     }
 });
 
-app.get('/lotCategory/:category',async (req, res) => {
-    const category = req.params.category
-    try {
-        const data = await Lot.find({category});
-        res.json(data);
-    } catch (error) {
-        console.error(error);
-    }
-});
 
-app.post('/upload', upload.single('image'), (req, res) => {
+app.post('/lot/new', upload.single('image'), (req, res) => {
     if (req.file) {
         res.json(req.file);
     }

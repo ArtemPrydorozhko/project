@@ -14,20 +14,21 @@
                 <a href="">main</a>/<a href="">category</a>
             </div>
             <div class="offer-header-sort">
-                <select name="" id="">
-                    <option value="">most popular</option>
-                    <option value="">cheap first</option>
-                    <option value="">expensive first</option>
-                    <option value="">whattt? you never..</option>     
+                <select name="sort" id="offer-header-sort">
+                    <option value="1">popular first</option>
+                    <option value="2">cheap first</option>
+                    <option value="3">expensive first</option>
+                    <option value="4">A-Z</option>     
+                    <option value="5">Z-A</option>     
                 </select>
             </div>
         </div>
         <div class="offer-filter">
             <div class="offer-filter-option-price">
                 <div class="price-word">Price, $</div>
-                <input type="number" placeholder="from" class="price-from">
+                <input type="number" placeholder="from" class="price-from" min=0>
                 &mdash;
-                <input type="number" placeholder="to" class="price-to">
+                <input type="number" placeholder="to" class="price-to" min=0>
                 <button class="price-btn">OK</button>
             </div>
             <div class="offer-filter-option">

@@ -5,6 +5,7 @@ import axios from 'axios';
 const filter = document.querySelector('.offer-filter');
 const offerLots = document.querySelector('.offer-lots');
 
+
 let lots;
 
 // adding event listeners ===========================================================
@@ -12,7 +13,37 @@ document.querySelector('.filterBtn').addEventListener('click', (event) => {
     filter.classList.toggle('filter-show');
 });
 
-offerLots.addEventListener('click', ({target}) => {
+document.getElementById('offer-header-sort').addEventListener('change', event => {
+    const url = new URL(window.location.href);
+    url.searchParams.set('sort', event.target.value);
+    window.location.href = url.href;
+});
+
+document.querySelector('.offer-filter').addEventListener('click', event => {
+    if (event.target.closest('.price-btn')) {
+        const from = document.querySelector('.price-from').value;
+        const to = document.querySelector('.price-to').value;
+        const url = new URL(window.location.href);
+
+        if (from) {
+            url.searchParams.set('fmin', from);
+        } else {
+            url.searchParams.delete('fmin');
+        }
+        if (to) {
+            url.searchParams.set('fmax', to);
+        } else {
+            url.searchParams.delete('fmax');
+        }
+
+        if (from && to && from > to)
+            return; 
+        
+        window.location.href = url.href;
+    }
+});
+
+offerLots.addEventListener('click', ({ target }) => {
     const btn = target.closest('.offer-lots-pages-wrapper button');
     if (btn) {
         const goToPage = parseInt(btn.dataset.goto, 10);
@@ -24,37 +55,51 @@ offerLots.addEventListener('click', ({target}) => {
 window.onload = getLots;
 
 async function getLots() {
-    const href = window.location.href;
-    const url = new URL(href);
-    const search = url.searchParams.get("search");
-    const category = url.searchParams.get("category");
-    const searchStorage = localStorage.getItem('search');
-    try {
-        if (search) {
-            lots = await axios.get(`/lotSearch/${search}`);
-            console.log(lots.data);
-            renderLots(lots.data);
-        } else if (searchStorage) {
-            let url = window.location.href.split('?');
-            window.location.href = url[0] + '?search=' + searchStorage;
-            lots = await axios.get(`/lotSearch/${searchStorage}`);
-            console.log(lots.data);
-            renderLots(lots.data);
-        } else if (category){
-            lots = await axios.get(`/lotCategory/${category}`);
-            console.log(lots.data);
-            renderLots(lots.data);
-        } else {
-            lots = await axios.get(`/lot`);
-            console.log(lots.data);
-            renderLots(lots.data);
-        }
-    } catch (error) {
-        console.error(error);
+    const url = new URL(window.location.href);
+    const requestUrl = url.href.split('?')[0];
+
+    const searchStorage = sessionStorage.getItem('search');
+    if (searchStorage) {
+        sessionStorage.removeItem('search');
+        window.location.href = requestUrl + '?search=' + searchStorage;
     }
 
-    if (searchStorage) {
-        localStorage.removeItem('search');
+    const search = url.searchParams.get("search");
+    const category = url.searchParams.get("category");
+    const sort = url.searchParams.get("sort");
+    const fmin = url.searchParams.get("fmin");
+    const fmax = url.searchParams.get("fmax");
+
+
+    let request = '';
+
+    if (search) {
+        request += '?search=' + search;
+    } else if (category) {
+        request += '?category=' + category;
+    }
+
+    if (sort) {
+        request += (!request ? '?sort=' : '&sort=') + sort;
+        document.querySelector(`#offer-header-sort option[value="${sort}"`).setAttribute('selected', 'selected');
+    }
+    if (fmin) {
+        request += (!request ? '?fmin=' : '&fmin=') + fmin;
+        document.querySelector('.price-from').value = fmin
+    }
+    if (fmax) {
+        request += (!request ? '?fmax=' : '&fmax=') + fmax;
+        document.querySelector('.price-to').value = fmax
+    }
+    console.log(request);
+
+    try {
+        lots = await axios.get(url.origin +'/lot' + request);
+        console.log(lots)
+        if (lots.data.length)
+            renderLots(lots.data);
+    } catch (error) {
+        console.error(error);
     }
 }
 
@@ -90,7 +135,7 @@ function renderLot(data) {
         </div>
     </div>`;
 
-    offerLots.insertAdjacentHTML('afterbegin', markup);
+    offerLots.insertAdjacentHTML('beforeend', markup);
 }
 
 function renderButtons(page, pages) {
