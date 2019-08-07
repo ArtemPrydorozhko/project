@@ -33,17 +33,17 @@
     background: $background_standart;
     @include mq_medium {
         margin: 0 10px;
-        grid-template-rows: 80px auto auto;
+        grid-template-rows: 80px auto minmax(50px, max-content);
         grid-template-columns: auto;
     }
     @include mq_medium_small {
         margin: 0 10px;
-        grid-template-rows: 80px auto auto;
+        grid-template-rows: 80px auto minmax(50px, max-content);;
         grid-template-columns: auto;
     }
     @include mq_small {
         margin: 0 5px;
-        grid-template-rows: 80px auto auto;
+        grid-template-rows: 80px auto minmax(50px, max-content);;
         grid-template-columns: auto;
     }
 

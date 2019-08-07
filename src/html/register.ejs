@@ -1,0 +1,15 @@
+<% include src/html/header %>
+
+<div class="auth-container">
+    <div class="auth">
+        <h2>Register</h2>
+        <form action="/user" method="post" class="auth-form">
+            <input type="text" name="username" required placeholder="username" id="username">
+            <input type="password" name="password" required placeholder="password" id="password">
+            <input type="submit" value="Register">
+        </form>
+        <p class="auth-error">There is user with this username</p>
+    </div>
+</div>
+
+<% include src/html/footer %>

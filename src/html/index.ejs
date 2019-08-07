@@ -23,18 +23,25 @@
                 </h2>
 
                 <div class="special-offer">
+                    <%% lot.forEach( lot => { %>
                     <div class="special-offer-item">
                         <div class="special-offer-item-img">
-                            <img src="../img/2.jpg" alt="" >
+                            <img src="<%%= lot.image %>" alt="<%%= lot.title %>" >
                         </div>
                         <div class="special-offer-item-desc">
-                                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Necessitatibus dolorum fugit sit eos
+                                <%% if(lot.title.length > 50) { %>
+                                <%%= lot.title.substring(0, 50) %>
+                                <%% } else { %>
+                                <%%= lot.title %>
+                                <%% } %>
                         </div> 
                         <p class="special-offer-item-price">
-                            price: <span class="amount">$1000</span>
+                            currentPrice: <span class="amount">$<%%= lot.currentPrice %></span>
                         </p>
                     </div>
-                    <div class="special-offer-item">
+                    <%% }) %>
+                    
+                    <!-- <div class="special-offer-item">
                         <div class="special-offer-item-img">
                             <img src="../img/2.jpg" alt="" >
                         </div>
@@ -88,7 +95,7 @@
                         <p class="special-offer-item-price">
                             price: <span class="amount">$1000</span>
                         </p>
-                    </div>
+                    </div> -->
                 </div>
             </div>
 

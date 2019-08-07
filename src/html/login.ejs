@@ -1,0 +1,16 @@
+<% include src/html/header %>
+
+<div class="auth-container">
+    <div class="auth">
+        <h2>Login</h2>
+        <form action="/user" method="get" class="auth-form">
+            <input type="text" name="username" required placeholder="username" id="username">
+            <input type="password" name="password" required placeholder="password" id="password">
+            <input type="submit" value="Login">
+        </form>
+        <p class="auth-error">Wrong username or password</p>
+        <a href="/register.html">Or register</a>
+    </div>
+</div>
+
+<% include src/html/footer %>

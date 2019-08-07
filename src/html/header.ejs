@@ -8,7 +8,7 @@
 <body>
     <div class="header-container">
         <header class="header">
-            <a href="#" class="logo">Au4u</a>
+            <a href="/" class="logo">Au4u</a>
             <nav class="main-nav nav-uncollapsed">
                 <ul class="nav-list">
                     <li class="nav-list-item"><a href="#">Some test</a>
@@ -32,9 +32,10 @@
                 </ul>
             </nav>
             <ul class="auth-group">
-                <li class="auth-group-item unauthorised"><a href="">Login</a></li>
-                <li class="auth-group-item unauthorised"><a href="">Register</a></li>
-                <li class="auth-group-item authorised"><a href="">Logout</a></li>
+                <li class="auth-group-item unauthorized"><a href="/login.html">Login</a></li>
+                <li class="auth-group-item unauthorized"><a href="/register.html">Register</a></li>
+                <li class="auth-group-item hidden authorized"><a href="#" class="my-account-a">My account</a></li>
+                <li class="auth-group-item hidden authorized"><a href="#" class="logout-a">Logout</a></li>
             </ul>
             <nav class="main-nav nav-collapsed">
                 <input id="nav-collapsed-toggle" type="checkbox" />
@@ -42,13 +43,14 @@
                     <span></span>
                 </label>
                 <ul class="nav-list-col">
-                    <li class="nav-list-col-item unauthorised">
+                    <li class="nav-list-col-item">
                         <ul class="nav-submenu-col">
-                            <li class="nav-submenu-col-item"><a href="">Register</a></li>
-                            <li class="nav-submenu-col-item"><a href="">Login</a></li>
+                            <li class="nav-submenu-col-item unauthorized"><a href="/login.html">Login</a></li>
+                            <li class="nav-submenu-col-item unauthorized"><a href="/register.html">Register</a></li>
+                            <li class="nav-submenu-col-item hidden authorized"><a href="#" class="my-account-a">My account</a></li>
+                            <li class="nav-submenu-col-item hidden authorized"><a href="#" class="logout-a">Logout</a></li>
                         </ul>
                     </li>
-                    <li class="nav-list-col-item authorised"><a href="">Logout</a></li>
                     <li class="nav-list-col-item">
                         <ul class="nav-submenu-col">
                             <li class="nav-submenu-col-item"><a href="">some text</a></li>

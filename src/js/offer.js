@@ -1,4 +1,3 @@
-import './../scss/main.scss';
 import './searchPrepare';
 import axios from 'axios';
 
@@ -77,6 +76,10 @@ async function getLots() {
         request += '?search=' + search;
     } else if (category) {
         request += '?category=' + category;
+        const a = document.createElement('a');
+        a.setAttribute('href', `/offer.html?category=${category}`);
+        a.textContent = category;
+        document.querySelector('.offer-header-breadcrums');
     }
 
     if (sort) {
@@ -122,7 +125,7 @@ function renderLot(data) {
         </div>
         <div class="offer-lots-item-description">
             <div class="offer-lots-item-description-title">
-                <a href="/lot/${data._id}">${data.title}</a>
+                <a href="/lot/${data._id}">${checkTitle(data.title)}</a>
             </div>
             <div class="offer-lots-item-description-info">
                 seller: ${data.seller}
@@ -190,4 +193,12 @@ function createButton(page, type, pages) {
 
 function clearLots() {
     offerLots.innerHTML = '';
+}
+
+function checkTitle(title) {
+    if (title.length > 50) {
+        return title.substring(0, 50);
+    } else {
+        return title;
+    }
 }

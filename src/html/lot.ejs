@@ -7,10 +7,10 @@
     <div class="lot">
         <div class="lot-header">
             <div class="lot-header-breadcrums">
-                <a href="/offer.html">main</a> > <a href="/offer.html?category=<%%= lot.category %>"><%%= lot.category %></a>
+                <a href="/offer.html">main</a>/<a href="/offer.html?category=<%%= lot.category %>"><%%= lot.category %></a>
             </div>
         </div>
-        <div class="lot-picture" style="background-image: url('/<%%= lot.image %>')">
+        <div class="lot-picture" style="background-image: url('<%%= lot.image %>')">
             
         </div>
         <div class="lot-details">
@@ -23,10 +23,14 @@
             <div class="lot-details-price">
                 <span class="lot-details-price-text">Current price:</span>
                 <span class="lot-details-price-value">$<%%= lot.currentPrice %></span>
-                <form action="">
-                    <input type="number" class="lot-details-price-bet" placeholder="$">
+                <form action="/lot?_method=PUT" method="POST" class="lot-details-price-form authorized hidden">
+                    <input type="number" name="price" class="lot-details-price-bet" placeholder="$" min="<%%= lot.currentPrice + 1 %>">
+                    <input type="hidden" name="lotId" value="<%%= lot._id %>">
+                    <input type="hidden" name="username" value="">
+                    <input type="hidden" name="password" value="">
                     <button>Bid</button>
                 </form>
+                <p class="unauthorized">Login to bid</p>
             </div>
         </div>
         <div class="lot-description">
@@ -37,9 +41,9 @@
         </div>
         <div class="lot-bids">
             <span>Bids:</span>
-            <%% lot.bids.forEach( bid => { %>
-            <p><%%= bid.user %>: $<%%= bid.price %></p>
-            <%% }) %> 
+            <%% lot.bids.reverse().forEach( bid => { %>
+            <p><%%= bid.user %> - $<%%= bid.price %>.  <%%=bid.time.getHours() + ':' + bid.time.getMinutes() + ',' + bid.time.toDateString() %></p>
+            <%% }) %>
         </div>
     </div>
 

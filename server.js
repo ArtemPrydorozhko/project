@@ -4,14 +4,19 @@ const express = require('express'),
     path = require('path'),
     multer = require('multer'),
     mongoose = require('mongoose'),
-    html = path.join(__dirname, 'dist/');
+    methodOverride = require('method-override'),
+    html = path.join(__dirname, 'dist/'),
+    Bid = require('./models/bid'),
+    Lot = require('./models/lot'),
+    User = require('./models/user');
+
 
 
 // multer settings ---------------------------------------
 const storage = multer.diskStorage({
     destination: './user_data/img',
     filename: function (req, file, cb) {
-        cb(null, Date.now().toString() + file.originalname)
+        cb(null, Date.now().toString() + '_' + file.originalname)
     }
 })
 const upload = multer({ storage: storage, limits: 2000000 });
@@ -19,60 +24,19 @@ const upload = multer({ storage: storage, limits: 2000000 });
 // mongoose settings ------------------------------------
 mongoose.connect('mongodb://localhost/au4u', { useNewUrlParser: true });
 
-var lotSchema = new mongoose.Schema({
-    title: String,
-    image: String,
-    description: String,
-    currentPrice: Number,
-    category: String,
-    sellerId: mongoose.SchemaTypes.ObjectId,
-    seller: String,
-    bids: [{
-        userId: mongoose.SchemaTypes.ObjectId,
-        user: String,
-        price: Number,
-        time: {type: Date, defalut: Date.now()}
-    }]
-});
-
-var Lot = mongoose.model("Lot", lotSchema);
-
-// Lot.create([
-//     {   title: 'firsrt',
-//         image: 'user_img/1.png',
-//         description: 'ddsfdhgsdhghvufhuivhfuibhvi',
-//         currenPrice: 15,
-//         sellerId: 1,
-//         bids: [{
-//             userId: 1,
-//             price: 15
-//         }]
-//     },
-//     {   title: 'second',
-//         image: 'user_img/1t.png',
-//         description: 'ddsfdhgsdhghvufhuivhfuibhvi',
-//         currenPrice: 20,
-//         sellerId: 2,
-//         bids: [{
-//             userId: 2,
-//             price: 20
-//         }]
-//     },
-// ], (err, res) => {
-//     if(err)
-//         console.log(err);
-// });
-
 // ---------------------------------------
 
 app.use(bodyParser.urlencoded({ extended: true }));
-app.set('views', path.resolve(__dirname, 'dist/views'));
-app.set('view engine', 'ejs');
+app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, 'dist')));
 app.use(express.static(path.join(__dirname, 'user_data')));
 
-app.get('/', (req, res) => {
-    res.sendFile(html + 'index.html');
+app.set('views', path.resolve(__dirname, 'dist/views'));
+app.set('view engine', 'ejs');
+
+app.get('/', async (req, res) => {
+    const lot = await Lot.find({}).sort({$natural: -1}).limit(12);
+    res.render('index', {lot});
 });
 
 // app.get('/lot',async (req, res) => {
@@ -101,7 +65,7 @@ app.get('/lot', async (req, res) => {
         try {
             const data = await Lot.find({}).sort({ $natural: 1 }).limit(12);
             res.json(data);
-            
+
         } catch (error) {
             console.error(error);
             res.send(error);
@@ -157,23 +121,106 @@ app.get('/lot', async (req, res) => {
 app.get('/lot/:id', async (req, res) => {
     const id = req.params.id;
     try {
-        const lot = await Lot.findById(id);
-        res.render('lot', {lot});
+        
+        const lot = await Lot.findById(id).populate('bids').exec();console.log(lot);
+        res.render('lot', { lot });
     } catch (error) {
         console.log(error);
     }
 });
 
+app.put('/lot', async (req, res) => {
+    const { username, password, lotId, price } = req.body;
+    try {
+        const userId = (await User.findOne({ username, password }))._id;
+        const bid =  await Bid.create(
+            {
+                userId,
+                lotId,
+                price,
+                user: username,
+                time: Date.now()
+            });
 
-app.post('/lot/new', upload.single('image'), (req, res) => {
+        await Lot.findByIdAndUpdate(lotId, {$push: {bids: bid._id},currentPrice: price});
+        await User.findByIdAndUpdate(userId, {$push: {bids: bid._id}});
+
+        res.redirect(`/lot/${lotId}`);
+    } catch (error) {
+        console.log(error);
+        res.send('error');
+    }
+});
+
+
+app.post('/lot', upload.single('image'), (req, res) => {
     if (req.file) {
         res.json(req.file);
     }
     else throw 'error';
 });
 
+app.post('/user', async (req, res) => {
+    const username = req.query.u;
+    const password = req.query.p;
+
+    try {
+        const user = await User.create({ username, password });
+        res.redirect(`/user/${user._id}`);
+    } catch (err) {
+        console.log(err);
+        res.redirect('/register');
+    }
+});
+
+app.get('/user/:id', async (req, res) => {
+    const id = req.params.id;
+
+    try {
+        const user = await User.findById(id);
+        res.redirect('/');
+
+    } catch (error) {
+        console.log(error);
+        res.send('error');
+    }
+});
+
+app.get('/userRegister', async (req, res) => {
+    const username = req.query.u;
+
+    try {
+        const result = await User.find({ username });
+        if (result.length) {
+            return res.json(false);
+        } else {
+            return res.json(true);
+        }
+    } catch (err) {
+        console.log(err);
+        res.send('error');
+    }
+});
+
+app.get('/userLogin', async (req, res) => {
+    const username = req.query.u;
+    const password = req.query.p;
+
+    try {
+        const result = await User.find({ username, password });
+        if (result.length) {
+            return res.json(true);
+        } else {
+            return res.json(false);
+        }
+    } catch (err) {
+        console.log(err);
+        res.send('error');
+    }
+});
+
 app.get('/aboutt', (req, res) => {
-    res.render('about.ejs',{ee: {data: "fdfnbljufdgyudvbgvy shdsygjsdywevgwj"}});
+    res.render('about.ejs', { ee: { data: "fdfnbljufdgyudvbgvy shdsygjsdywevgwj" } });
 });
 
 

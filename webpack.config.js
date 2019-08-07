@@ -7,7 +7,9 @@ module.exports = {
         main: './src/js/index.js',
         offer: './src/js/offer.js',
         lot: './src/js/lot.js',
-        styles: './src/js/styles.js'
+        common: './src/js/common.js',
+        register: './src/js/register.js',
+        login: './src/js/login.js',
     },
     output: {
         filename: 'js/[name].bundle.js',
@@ -45,12 +47,12 @@ module.exports = {
     plugins: [
         new HtmlWebpackPlugin({
             template: '!!ejs-compiled-loader!./src/html/index.ejs',
-            filename: 'index.html',
+            filename: 'views/index.ejs',
             minify: {
                 collapseWhitespace: true,
                 removeComments: true
             },
-            chunks: ['main']
+            chunks: ['main', 'common']
         }),
         new HtmlWebpackPlugin({
             template: '!!ejs-compiled-loader!./src/html/offer.ejs',
@@ -59,7 +61,7 @@ module.exports = {
                 collapseWhitespace: true,
                 removeComments: true
             },
-            chunks: ['offer']
+            chunks: ['offer', 'common']
         }),
         new HtmlWebpackPlugin({
             template: '!!ejs-compiled-loader!./src/html/contacts.ejs',
@@ -68,7 +70,7 @@ module.exports = {
                 collapseWhitespace: true,
                 removeComments: true
             },
-            chunks: ['styles']
+            chunks: ['common']
         }),
         new HtmlWebpackPlugin({
             template: '!!ejs-compiled-loader!./src/html/about.ejs',
@@ -77,7 +79,7 @@ module.exports = {
                 collapseWhitespace: true,
                 removeComments: true
             },
-            chunks: ['styles']
+            chunks: ['common']
         }),
         new HtmlWebpackPlugin({
             template: '!!ejs-compiled-loader!./src/html/lot.ejs',
@@ -86,7 +88,7 @@ module.exports = {
                 collapseWhitespace: true,
                 removeComments: true
             },
-            chunks: ['lot']
+            chunks: ['lot', 'common']
         }),
         new HtmlWebpackPlugin({
             template: '!!ejs-compiled-loader!./src/html/createLot.ejs',
@@ -95,7 +97,25 @@ module.exports = {
                 collapseWhitespace: true,
                 removeComments: true
             },
-            chunks: ['styles']
+            chunks: ['common']
+        }),
+        new HtmlWebpackPlugin({
+            template: '!!ejs-compiled-loader!./src/html/register.ejs',
+            filename: 'register.html',
+            minify: {
+                collapseWhitespace: true,
+                removeComments: true
+            },
+            chunks: ['common','register']
+        }),
+        new HtmlWebpackPlugin({
+            template: '!!ejs-compiled-loader!./src/html/login.ejs',
+            filename: 'login.html',
+            minify: {
+                collapseWhitespace: true,
+                removeComments: true
+            },
+            chunks: ['common', 'login']
         }),
         new MiniCssExtarctPlugin({
             filename: 'css/[name].css'
