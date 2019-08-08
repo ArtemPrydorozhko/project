@@ -3,6 +3,7 @@
     border-radius: 15px;
     border: 1px solid $main_category_border;
     background: $background_standart;
+    padding-bottom: 10px;
 
     @include mq_medium {
         margin: 0 10px;
@@ -44,7 +45,7 @@
         position: relative;
 
         @include mq_small {
-            padding-right: 5px;
+            padding-right: 35px;
         }
 
         label {

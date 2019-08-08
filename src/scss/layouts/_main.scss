@@ -27,21 +27,19 @@
         border: 1px solid $main_category_border;
 
         @include mq_large {
-            max-width: 190px;
-           // height: 280px;
-           height: auto;
+           width: 16%;
+           height: 300px;
         }
         @include mq_medium_large {
-            max-width: 150px;
-            height: auto;
-           // height: 260px;
+            width: 23%;
+            height: 300px;
         }
         @include mq_medium {
-            max-width: 220px;
+            width: 32%;
             height: 280px;
         }
         @include mq_medium_small {
-            width: 45%;
+            width: 48%;
             height: 300px;
         }
         @include mq_small {
@@ -52,15 +50,7 @@
 
         &-img {
            height: 60%;
-           display: flex;
-           justify-content: center;
-           align-items: center;
-           
-
-            & img {
-                max-width: 100%;
-                max-height: 100%;
-            }
+           background: no-repeat center/contain;
         }
 
         &-price {

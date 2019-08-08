@@ -30,8 +30,9 @@ module.exports = {
                 ]
             },
             {
-                test: /\.html/,
-                use: 'html-loader'
+                test: /\.js$/,
+                use: 'babel-loader',
+                exclude: ['/node_modules/', 'server.js', '/routes/', '/models']
             },
             {
                 test: /\.(svg|png|jpg)$/,

@@ -16,6 +16,9 @@ body {
     background-size: 200px 200px;
     min-height: 100%;
     padding-bottom: $footer_height + 10px;
+    font-size: calc(14px + (19 - 14) * ((100vw - 320px) / (1280 - 300)));
+    font-family: Arial, Helvetica, sans-serif;
+    color: #333333;
 }
 
 ul, ol {
@@ -26,6 +29,10 @@ ul, ol {
 a {
     text-align: center;
     text-decoration: none;
+    color: $header_a;
+    &:hover {
+        color: $header_a_hov;
+    }
 }
 
 .container {
