@@ -1,28 +1,3 @@
-.lot-container {
-    margin: auto;
-    margin-top: $header_height;
-    padding-top: 30px;
-    
-
-    @include mq_large {
-        max-width: $width_large;
-    }
-    @include mq_medium_large {
-        max-width: $width_medium_large;
-    }
-    @include mq_medium {
-        max-width: $width_medium;
-        padding-top: 20px;
-    }
-    @include mq_medium_small {
-        max-width: $width_medium_small;
-        padding-top: 15px;
-    }
-    @include mq_small {
-        max-width: $width_small;
-        padding-top: 10px;
-    }
-}
 
 .lot {
     margin: 10px 20px;
@@ -155,6 +130,8 @@
             display: flex;
             justify-content: flex-start;
             align-items: center;
+            color: #c92f00;
+            font-size: 1.3em;
 
             &-value {
                 margin-right: 20px;

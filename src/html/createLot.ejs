@@ -1,11 +1,11 @@
 <% include src/html/header %>
 
-<div class="createLot-container">
+<div class="createLot-container container">
     <div class="createLot">
         <form action="/lot" method="post" enctype="multipart/form-data" class="createLot-form">
             <input type="text" name="title" required maxlength="80" placeholder="Title">
             <input type="number" name="price" id="" placeholder="Price" required>
-            <textarea name="description" id="" cols="30" rows="10" placeholder="Description" required></textarea>
+            <textarea name="description" id="" placeholder="Description" required></textarea>
             <select name="category" id="">
                 <option value="other" selected hidden>Choose category</option>
                 <option value="other">Other</option>
@@ -15,8 +15,7 @@
                 <option value="clothes">Clothes</option>
             </select>
             <input type="file" name="image" id="" accept="image/*" value="choose image" required>
-            <input type="hidden" name="owner" value="roflan">
-            <input type="hidden" name="ownerId" value=44>
+            <input type="hidden" name="username" value="">
             <input type="submit" value="Create Lot">
         </form>
     </div>

@@ -79,7 +79,7 @@ async function getLots() {
         const a = document.createElement('a');
         a.setAttribute('href', `/offer.html?category=${category}`);
         a.textContent = category;
-        document.querySelector('.offer-header-breadcrums');
+        document.querySelector('.offer-header-breadcrums').appendChild(a);
     }
 
     if (sort) {
@@ -197,7 +197,7 @@ function clearLots() {
 
 function checkTitle(title) {
     if (title.length > 50) {
-        return title.substring(0, 50);
+        return title.substring(0, 47) + '...';
     } else {
         return title;
     }

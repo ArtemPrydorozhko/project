@@ -1,7 +1,7 @@
 <% include src/html/header %>
 <!-- <% require('../img/2.jpg') %> --> 
 
-<div class="lot-container">
+<div class="lot-container container">
     <% include src/html/category %>
 
     <div class="lot">
@@ -18,18 +18,19 @@
                 <%%= lot.title %>
             </div>
             <div class="lot-details-seller">
-                seller: <%%= lot.seller %>
+                seller: <span><%%= lot.seller %></span>
             </div>
             <div class="lot-details-price">
                 <span class="lot-details-price-text">Current price:</span>
                 <span class="lot-details-price-value">$<%%= lot.currentPrice %></span>
-                <form action="/lot?_method=PUT" method="POST" class="lot-details-price-form authorized hidden">
+                <%% if (!lot.sold) {%>
+                <form action="/lot/<%%= lot._id %>?_method=PUT" method="POST" class="lot-details-price-form authorized hidden">
                     <input type="number" name="price" class="lot-details-price-bet" placeholder="$" min="<%%= lot.currentPrice + 1 %>">
-                    <input type="hidden" name="lotId" value="<%%= lot._id %>">
                     <input type="hidden" name="username" value="">
                     <input type="hidden" name="password" value="">
                     <button>Bid</button>
                 </form>
+                <%% } %>
                 <p class="unauthorized">Login to bid</p>
             </div>
         </div>

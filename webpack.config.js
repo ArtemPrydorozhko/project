@@ -10,6 +10,8 @@ module.exports = {
         common: './src/js/common.js',
         register: './src/js/register.js',
         login: './src/js/login.js',
+        createLot: './src/js/createLot.js',
+        user: './src/js/user.js',
     },
     output: {
         filename: 'js/[name].bundle.js',
@@ -97,7 +99,7 @@ module.exports = {
                 collapseWhitespace: true,
                 removeComments: true
             },
-            chunks: ['common']
+            chunks: ['common', 'createLot']
         }),
         new HtmlWebpackPlugin({
             template: '!!ejs-compiled-loader!./src/html/register.ejs',
@@ -116,6 +118,15 @@ module.exports = {
                 removeComments: true
             },
             chunks: ['common', 'login']
+        }),
+        new HtmlWebpackPlugin({
+            template: '!!ejs-compiled-loader!./src/html/user.ejs',
+            filename: 'views/user.ejs',
+            minify: {
+                collapseWhitespace: true,
+                removeComments: true
+            },
+            chunks: ['common', 'user']
         }),
         new MiniCssExtarctPlugin({
             filename: 'css/[name].css'

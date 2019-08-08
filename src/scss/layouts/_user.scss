@@ -1,0 +1,151 @@
+.user {
+    margin: 10px 20px;
+    border-radius: 15px;
+    border: 1px solid $main_category_border;
+    background: $background_standart;
+
+    @include mq_medium {
+        margin: 0 10px;
+    }
+    @include mq_medium_small {
+        margin: 0 10px;
+    }
+    @include mq_small {
+        margin: 0 5px;
+    }
+
+    h2 {
+        text-transform: uppercase;
+        text-align: center;
+        padding: 10px 0;
+        border-bottom: 1px solid $main_category_border;
+    }
+}
+
+.user-lots {
+
+    .offer-lots-item {
+        position: relative;
+    }
+    .sold {
+        position: absolute;
+        z-index: 15;
+        text-align: center;
+        display: inline-block;
+        left: 30%;
+        right: 30%;
+        top: 15%;
+        font-size: 100px;
+        transform: rotate(-20deg);
+    }
+
+    .offer-lots-item-description {
+        padding-right: 110px;
+        position: relative;
+
+        @include mq_small {
+            padding-right: 5px;
+        }
+
+        label {
+            display: none;
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            z-index: 10;
+            top: 5px;
+            right: 5px;
+            background: url('../img/arrow-both.svg');
+            background-size: cover;
+            box-shadow: 0 0 3px rgba(0, 46, 145, 0.1);
+            cursor: pointer;
+
+            @include mq_small {
+                display: block;
+            }
+        }
+    }
+
+    &-new {
+        padding: 5px 0;
+        border-bottom: 1px solid $main_category_border;
+        
+        a {
+            height: 35px;
+            text-align: center;
+            width: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto;
+            color: #fff;
+            cursor: pointer;
+            background: $input_color;
+            border: 1px solid $input_color;
+            outline: none;
+            &:hover {
+                background: $btn_hover;
+                box-shadow: 0 0 1px 1px rgba(0, 46, 145, 0.1);
+            }
+        }
+    }
+
+    &-item-controlls {
+        position: absolute;
+        width: 100px;
+        height: 100%;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border-left: 1px dashed $main_category_border;
+        
+        @include mq_small {
+            display: none;
+            background: $background_standart;
+            justify-content: flex-end;
+        }
+
+        a {
+            width: 80px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+
+        .confirm {
+            background: $input_color;
+            border: 1px solid $input_color;
+            outline: none;
+            &:hover {
+                background: $btn_hover;
+                box-shadow: 0 0 1px 1px rgba(0, 46, 145, 0.1);
+            }
+        }
+        .delete {
+            background: #e25858;
+            border: 1px solid #e25858;
+            outline: none;
+            &:hover {
+                background: #c44c4c;
+                box-shadow: 0 0 1px 1px rgba(0, 46, 145, 0.1);
+            }
+        }
+    }
+}
+
+
+#user-lots-item-controlls-check {
+    display: none;
+
+    &:checked ~ .user-lots-item-controlls {
+        display: flex;
+    }
+}

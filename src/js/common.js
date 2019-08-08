@@ -1,4 +1,5 @@
 import './../scss/main.scss';
+import Axios from 'axios';
 
 if (localStorage.getItem('username') && localStorage.getItem('password')) {
     const unauthorized = document.getElementsByClassName('unauthorized');
@@ -20,7 +21,10 @@ window.addEventListener('click', event => {
         event.preventDefault();
         const username = localStorage.getItem('username');
         const password = localStorage.getItem('password');
-        location.href = `${url.origin}/user?u=${username}&p=${password}`;
+        Axios.get(`${url.origin}/userLogin?u=${username}&p=${password}`)
+        .then(res=> {
+            location.href = `${url.origin}/user/${res.data}`;
+        });
     } else if (target.closest('.logout-a')) {
         event.preventDefault();
         localStorage.clear();

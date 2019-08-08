@@ -15,7 +15,7 @@ async function checkData() {
             }
             return false;
         }
-        return true;
+        return result.data;
     } catch (err) {
         console.log(err);
     }
@@ -25,9 +25,10 @@ form.addEventListener('submit', (event) => {
     event.preventDefault();
 
     (async function () {
-        if (await checkData()) {
+        const id = await checkData();
+        if (id) {
             const url = form.getAttribute('action');
-            form.setAttribute('action', `${url}?u=${username.value}&p=${password.value}`);
+            form.setAttribute('action', `${url}/${id}`);
             localStorage.setItem('username', username.value);
             localStorage.setItem('password', password.value);
             form.submit();

@@ -8,8 +8,9 @@ var lotSchema = new mongoose.Schema({
     category: String,
     sellerId: mongoose.SchemaTypes.ObjectId,
     seller: String,
-    addingTime: { type: Date, defalut: new Date() },
-    sold: { type: Boolean, default: false },
+    buyerId: mongoose.SchemaTypes.ObjectId,
+    addingTime: Date,
+    sold: Boolean,
     bids: [{
         type: mongoose.SchemaTypes.ObjectId,
         ref: 'Bid'

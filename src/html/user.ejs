@@ -1,5 +1,86 @@
 <% include src/html/header %>
 
-<h1>your acc</h1>
+<div class="user-container container">
+    <% include src/html/category %>
+
+    <div class="user">
+        <div class="user-lots">
+            <h2>My lots</h2>
+            <div class="user-lots-new">
+                <a href="/createLot.html">Create new lot</a>
+            </div>
+            <%% userLots.forEach( userLot => { %>
+            <div class="offer-lots-item">
+                <p class="sold <%%= userLot.sold?'':'hidden' %>">SOLD</p>
+                <div class="offer-lots-item-picture">
+                    <a href="/lot/<%%= userLot._id %>"><img src="<%%= userLot.image %>" alt="<%%= userLot.title %>"></a>
+                </div>
+                <div class="offer-lots-item-description">
+                    <div class="offer-lots-item-description-title">
+                        <a href="/lot/<%%= userLot._id %>">
+                            <%% if(userLot.title.length > 50) { %>
+                                <%%= userLot.title.substring(0, 50) %>
+                                <%% } else { %>
+                                <%%= userLot.title %>
+                                <%% } %>
+                            </a>
+                    </div>
+                    <div class="offer-lots-item-description-info">
+                        seller: <%%= userLot.seller %>
+                    </div>
+                    <div class="offer-lots-item-description-price">
+                        <span>Current price:
+                            <span class="offer-lots-item-description-price-value">$<%%= userLot.currentPrice %></span></span>
+                        <a href="/lot/<%%= userLot._id %>" class="offer-lots-item-description-btn">Details</a>
+                    </div>
+                    <%% if (!userLot.sold) { %>
+                    <label for="user-lots-item-controlls-check"></label>
+                    <input type="checkbox" name="" id="user-lots-item-controlls-check">
+                    <div class="user-lots-item-controlls">
+                        <%% if (userLot.bids.length){ %>
+                        <a href="/lot/<%%= userLot._id %>/sell?_method=PUT" class="confirm">Confirm</a>
+                        <%% } %>
+                        <a href="/lot/<%%= userLot._id %>?_method=DELETE" class="delete">Delete</a>
+                    </div>
+                    <%% } %>
+                </div>
+            </div>
+            <%% }) %>
+        </div>
+        <div class="user-bought">
+            <h2>Bought tols</h2>
+            <%% userBoughtLots.forEach( userLot => { %>
+            <div class="offer-lots-item">
+                <div class="offer-lots-item-picture">
+                    <a href="/lot/<%%= userLot._id %>"><img src="<%%= userLot.image %>" alt="<%%= userLot.title %>"></a>
+                </div>
+                <div class="offer-lots-item-description">
+                    <div class="offer-lots-item-description-title">
+                        <a href="/lot/<%%= userLot._id %>">
+                            <%% if(userLot.title.length > 50) { %>
+                                <%%= userLot.title.substring(0, 50) %>
+                                <%% } else { %>
+                                <%%= userLot.title %>
+                                <%% } %>
+                            </a>
+                    </div>
+                    <div class="offer-lots-item-description-info">
+                        seller: <%%= userLot.seller %> 
+                    </div>
+                    <div class="offer-lots-item-description-price">
+                        <span>Price:
+                            <span class="offer-lots-item-description-price-value">$<%%= userLot.currentPrice %></span></span>
+                        <a href="/lot/<%%= userLot._id %>" class="offer-lots-item-description-btn">Details</a>
+                    </div>
+                </div>
+            </div>
+            <%% }) %>
+        </div>
+        <div class="user-tracked">
+            <h2>My tracked lots</h2>
+
+        </div>
+    </div>
+</div>
 
 <% include src/html/footer %>
