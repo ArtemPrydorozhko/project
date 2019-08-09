@@ -1,5 +1,13 @@
 {
     "presets": [
-        "@babel/preset-env"
+        ["env", {
+            "target": {
+                "browsers": [
+                    "last 2 verdions",
+                    "ie >= 11"
+                ]
+            }
+        }
+        ]
     ]
 }

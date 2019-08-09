@@ -1,4 +1,3 @@
-import './../scss/main.scss';
 import Axios from 'axios';
 
 if (localStorage.getItem('username') && localStorage.getItem('password')) {

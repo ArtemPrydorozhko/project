@@ -1,3 +1,4 @@
+i
 const form = document.querySelector('.createLot-form');
 
 window.onload = function() {

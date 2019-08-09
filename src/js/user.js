@@ -1,3 +1,4 @@
+
 window.addEventListener('click', event => {
     
     if (event.target.closest('.confirm')) {

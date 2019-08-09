@@ -7,11 +7,12 @@ module.exports = {
         main: './src/js/index.js',
         offer: './src/js/offer.js',
         lot: './src/js/lot.js',
-        common: './src/js/common.js',
+        common: ['babel-polyfill','./src/js/common.js'],
         register: './src/js/register.js',
         login: './src/js/login.js',
         createLot: './src/js/createLot.js',
         user: './src/js/user.js',
+        styles: './src/js/styles.js'
     },
     output: {
         filename: 'js/[name].bundle.js',
@@ -24,15 +25,37 @@ module.exports = {
                 use: [
                     MiniCssExtarctPlugin.loader,
                     {
-                        loader :'css-loader'
+                        loader: 'css-loader'
                     },
                     'sass-loader'
                 ]
             },
+            // {
+            //     test: /\.js$/,
+            //     exclude: ['/node_modules/', '/server.js', '/routes/', '/models/', '/src/js/styles.js'],
+            //     use: {
+            //         loader: 'babel-loader',
+            //         options: {
+            //             presets: [
+            //                 [
+            //                     '@babel/preset-env',
+            //                     {
+            //                         targets: {
+            //                             ie: "11"
+            //                         },
+            //                         useBuiltIns: "usage"
+            //                     }
+            //                 ]
+            //             ]
+            //         }
+            //     },   
+            // },
             {
                 test: /\.js$/,
-                use: 'babel-loader',
-                exclude: ['/node_modules/', 'server.js', '/routes/', '/models']
+                exclude: ['/node_modules/', '/server.js', '/routes/', '/models/'],
+                use: {
+                    loader: 'babel-loader'
+                }
             },
             {
                 test: /\.(svg|png|jpg)$/,
@@ -55,7 +78,8 @@ module.exports = {
                 collapseWhitespace: true,
                 removeComments: true
             },
-            chunks: ['main', 'common']
+            chunks: ['common','main',  'styles'],
+            chunksSortMode: 'none'
         }),
         new HtmlWebpackPlugin({
             template: '!!ejs-compiled-loader!./src/html/offer.ejs',
@@ -64,7 +88,8 @@ module.exports = {
                 collapseWhitespace: true,
                 removeComments: true
             },
-            chunks: ['offer', 'common']
+            chunks: ['common','offer',  'styles'],
+            chunksSortMode: 'none'
         }),
         new HtmlWebpackPlugin({
             template: '!!ejs-compiled-loader!./src/html/contacts.ejs',
@@ -73,7 +98,8 @@ module.exports = {
                 collapseWhitespace: true,
                 removeComments: true
             },
-            chunks: ['common']
+            chunks: ['common', 'styles'],
+            chunksSortMode: 'none'
         }),
         new HtmlWebpackPlugin({
             template: '!!ejs-compiled-loader!./src/html/about.ejs',
@@ -82,7 +108,8 @@ module.exports = {
                 collapseWhitespace: true,
                 removeComments: true
             },
-            chunks: ['common']
+            chunks: ['common', 'styles'],
+            chunksSortMode: 'none'
         }),
         new HtmlWebpackPlugin({
             template: '!!ejs-compiled-loader!./src/html/lot.ejs',
@@ -91,7 +118,8 @@ module.exports = {
                 collapseWhitespace: true,
                 removeComments: true
             },
-            chunks: ['lot', 'common']
+            chunks: ['common','lot',  'styles'],
+            chunksSortMode: 'none'
         }),
         new HtmlWebpackPlugin({
             template: '!!ejs-compiled-loader!./src/html/createLot.ejs',
@@ -100,7 +128,8 @@ module.exports = {
                 collapseWhitespace: true,
                 removeComments: true
             },
-            chunks: ['common', 'createLot']
+            chunks: ['common', 'createLot', 'styles'],
+            chunksSortMode: 'none'
         }),
         new HtmlWebpackPlugin({
             template: '!!ejs-compiled-loader!./src/html/register.ejs',
@@ -109,7 +138,8 @@ module.exports = {
                 collapseWhitespace: true,
                 removeComments: true
             },
-            chunks: ['common','register']
+            chunks: ['common', 'register', 'styles'],
+            chunksSortMode: 'none'
         }),
         new HtmlWebpackPlugin({
             template: '!!ejs-compiled-loader!./src/html/login.ejs',
@@ -118,7 +148,8 @@ module.exports = {
                 collapseWhitespace: true,
                 removeComments: true
             },
-            chunks: ['common', 'login']
+            chunks: ['common', 'login', 'styles'],
+            chunksSortMode: 'none'
         }),
         new HtmlWebpackPlugin({
             template: '!!ejs-compiled-loader!./src/html/user.ejs',
@@ -127,7 +158,8 @@ module.exports = {
                 collapseWhitespace: true,
                 removeComments: true
             },
-            chunks: ['common', 'user']
+            chunks: ['common', 'user', 'styles'],
+            chunksSortMode: 'none'
         }),
         new MiniCssExtarctPlugin({
             filename: 'css/[name].css'
